@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        font-family: "Josefin Sans", sans-serif;
+      }
+
+      #table-crud {
+        box-shadow: rgb(3 1 12 / 15%) 0px 48px 100px 0px;
+        background-color: hsl(235, 24%, 19%) !important;
+      }
+
+      div.container,
+      div.col-sm-12 {
+        padding: 0 !important;
+      }
+    </style>
+
+    <title>Home</title>
+  </head>
+
+  <body class="text-white" style="background-color: hsl(235, 21%, 11%)">
+    <div class="container my-3">
+      <div class="row">
+        <h1
+          class="my-3 text-dark text-center alert alert-primary"
+          style="text-transform: capitalize"
+        >
+          Django Crud App 🚀
+        </h1>
+        <hr />
+        <div class="col-sm-12">
+          {% if update %}
+          <form
+            action="{% url 'update' iddata %}"
+            method="POST"
+            autocomplete="off"
+          >
+            {% csrf_token %} {{formupdate.as_p}}
+            <button type="submit" class="btn btn-warning">Update</button>
+          </form>
+          {% else %}
+          <form action="/" method="POST" autocomplete="off">
+            {% csrf_token %} {{form.as_p}}
+            <button type="submit" class="btn btn-success">Submit</button>
+          </form>
+          {% endif %}
+        </div>
+      </div>
+      <div class="my-4 container">
+        <div class="row">
+          <div class="col-sm-12">
+            <table class="table text-white" id="table-crud">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Address</th>
+                  <th scope="col">Number</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for dataitem in data %}
+                <tr
+                  style="vertical-align: middle; word-wrap: normal !important"
+                >
+                  <th scope="row">{{dataitem.name}}</th>
+                  <td>{{dataitem.address}}</td>
+                  <td>{{dataitem.number}}</td>
+                  <td>
+                    <a
+                      href="{% url 'update' dataitem.id %}"
+                      class="btn btn-warning btn-sm"
+                      >Update</a
+                    >
+                    <a
+                      href="{% url 'delete' dataitem.id %}"
+                      class="btn btn-danger btn-sm"
+                      >Delete</a
+                    >
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
