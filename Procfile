@@ -1,1 +1,0 @@
-web: waitress-serve --port=$PORT momo.wsgi:application

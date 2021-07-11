@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Django Crud{% endblock title %}
+{%block style %} #table-crud { box-shadow: rgb(3 1 12 / 15%) 0px 48px 100px 0px;
+} div.container, div.col-sm-12 { padding: 0 !important; } body {
+background-color: hsl(235, 21%, 11%) !important; } {%endblock style %}
+
+{% block body %}
+    <div class="container">
+    <div class="row my-5">
+    <div class="col-sm-12">
+    <form action="{% url 'update' iddata %}" method="POST" autocomplete="off">
+        {% csrf_token %} 
+        <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Your username</label>
+        <input class="form-control" id="disabledInput" name = "username" type="text" value="{{obj.Assignto}}" disabled style="cursor:not-allowed;">
+        </div>
+
+        <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Address</label>
+        <input class="form-control" type="text" value="{{obj.address}}" name="address">
+        </div>
+
+        <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Number</label>
+        <input class="form-control" type="text" value="{{obj.number}}" name="number">
+        </div>
+        <button type="submit" class="btn btn-warning">Update</button>
+    </form>
+    </div>
+    </div>
+    </div>
+{% endblock body %}

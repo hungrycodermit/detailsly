@@ -1,0 +1,46 @@
+{% extends 'base.html' %} {% block title %}Django Crud{% endblock title %}
+{%block style %} #table-crud { box-shadow: rgb(3 1 12 / 15%) 0px 48px 100px 0px;
+} div.container, div.col-sm-12 { padding: 0 !important; } body {
+background-color: hsl(235, 21%, 11%) !important; } {%endblock style %} 
+{%block body%}
+
+    <div class="container">
+    <div class="row my-5">
+    <div class="col-sm-12">
+      <table class="table text-white" id="table-crud">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Address</th>
+            <th scope="col">Number</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for dataitem in data %}
+          <tr style="vertical-align: middle; word-wrap: normal !important">
+            <th scope="row">{{dataitem.Assignto}}</th>
+            <td>{{dataitem.address}}</td>
+            <td>{{dataitem.number}}</td>
+            <td>
+              <a
+                href="{% url 'update' dataitem.id %}"
+                class="btn btn-warning btn-sm"
+                >Update</a
+              >
+              <a
+                href="{% url 'delete' dataitem.id %}"
+                class="btn btn-danger btn-sm"
+                >Delete</a
+              >
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    </div>
+    </div>
+    </div>
+
+{% endblock body%}
